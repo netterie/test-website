@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Introduction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">SHAMP</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="introduction.html">Introduction</a>
+</li>
+<li>
+  <a href="data.html">Data</a>
+</li>
+<li>
+  <a href="network_models.html">Network Models</a>
+</li>
+<li>
+  <a href="epidemic_simulation.html">Epidemic Simulation</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction</h1>
+
+</div>
+
+
+<p><br></p>
+<div id="abstract" class="section level2">
+<h2>Abstract</h2>
+<p>The goal of this project is to examine the feasibility of developing a state-of-the-art HIV transmission model to support public health planning at the local level. The key innovation is to focus on a specific local jurisdiction, designing the model structure to reflect the local transmission dynamics and parameterizing the model with local data.</p>
+<p>While our particular analytic focus is specific, the modeling framework is general and flexible. We use a stochastic network model that relies on Exponential Family Random Graph Models (ERGMs), a principled framework for statistical estimation and simulation of networks. ERGMs are both powerful and practical: they can represent a wide range of empirically relevant network features, and can be estimated from simple survey sample data (“egocentrically sampled”).</p>
+<p>This framework addresses a necessary direction for implementation science research: epidemic models must become more locally grounded. Advances in HIV treatment and prevention have changed the intervention policy landscape, and public health departments in the US are now tasked with determining which combination of treatment and prevention strategies will have the greatest impact. Epidemic modeling could be a valuable resource for this type of comprehensive HIV prevention planning. However, existing models are typically designed to be quite general, and parameterized with a combination of data from multiple populations. As a result they are not rooted in, or representative of, a local epidemic.</p>
+<p>The heterogeneity in the HIV epidemics in the US is profound, by race, by sex and by locality. For example, the estimated 2.5% prevalence of HIV/AIDS in 2013 in Washington D.C. was nearly four times higher than the estimated 0.7% prevalence in Seattle, Washington (1, 2). These cities are facing very different epidemics, in very different political, economic, and social environments. Those environments in turn facilitate and constrain behaviors that lead to HIV transmission and acquisition, testing rates, and the cascade of care (CoC). To promote comprehensive HIV prevention effectively, planning must be driven by local information, and epidemic modeling can only contribute if it is locally grounded.</p>
+<p><br></p>
+</div>
+<div id="motivation-the-heterosexual-hiv-epidemic-in-seattleking-county" class="section level2">
+<h2>Motivation: The Heterosexual HIV epidemic in Seattle/King County</h2>
+<p>This project focuses on a specific segment of the epidemic, in one jurisdiction. The rationale for these choices is briefly explained below.</p>
+<div id="why-focus-on-heterosexuals" class="section level3">
+<h3>Why focus on heterosexuals?</h3>
+<p>While heterosexuals are not currently designated a priority population for HIV prevention, they account for approximately 25% of HIV incidence in the U.S. nationally and 10-15% in WA State, with significant disparities by race and sex. Of the 10 cities with the highest incidence in 2014, 4 report over 30% of their prevalent cases were heterosexually acquired (Appendix 1). In addition, minorities, and in particular minority women and immigrants are disproportionately impacted by the HIV epidemic. To address those inequalities we must have a better understanding of the dynamics of transmission within these heterosexual populations. CDC has made a commitment to pursuing “a High-Impact Prevention approach by using combinations of scientifically proven, cost-effective, and scalable interventions targeted to the right populations in the right geographic areas”(20). In many localities, the right populations are heterosexual.</p>
+<p>It is also conceivable that in settings where prevalence among heterosexuals is very low, modest low-cost prevention efforts could bring the heterosexual epidemic down below the threshold for epidemic persistence. This is the real target for the programmatic efforts to “End AIDS” – not the prevention of all transmission at the individual level, but sub-threshold transmission at the population level. Modeling can help to identify whether transmission is close to that threshold, and it can help to identify the optimal strategy for reaching that goal, which would be a significant public health accomplishment.</p>
+</div>
+<div id="why-seattleking-county" class="section level3">
+<h3>Why Seattle/King County?</h3>
+<p>Seattle/King County is an ideal setting for this pilot project because it has a robust HIV treatment and prevention program, Washington State has set a goal of reducing incidence by 50% by 2020, there is a strong team of epidemic modelers at the University of Washington (UW), and there is long history of collaboration between the UW, the state (WA DoH) and local public health departments (Public Health Seattle King County, PHSKC) including using epidemic models to inform local prevention initiatives.</p>
+</div>
+<div id="locally-relevant-but-methodologically-general" class="section level3">
+<h3>Locally relevant, but methodologically general</h3>
+<p>This project is designed to demonstrate that complex, realistic epidemic models can be used to support specific local planning. But this local specificity is accomplished within a general, adaptible framework. The features of this model that make it local can be adapted to any context.</p>
+<p><br></p>
+</div>
+</div>
+<div id="epidemic-features" class="section level2">
+<h2>Epidemic features</h2>
+<p>There are two key features of the local heterosexual epidemic in Seattle/King County: the racial disparities here display empirical patterns that imply international travel and migration dynamics, and phylogenetic analyses suggest a connection to the local MSM epidemic.</p>
+<div id="international-travel-and-migration" class="section level3">
+<h3>International travel and migration</h3>
+<p>Heterosexual HIV prevalence differentials in Seattle/KC display large racial disparities similar to those observed throughout the U.s., in all risk exposure groups. An important overlay, however, is migration. KC is home to a diverse population, with large communities of immigrants from countries in East Africa and Central America. The impact on HIV prevalence differentials can be seen in the table below: about half of the Black and Hispanic persons living with HIV in KC are foreign born, compared to about 2% of all other groups.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Subgroup</th>
+<th>Estimated HIV Prev/100K</th>
+<th>US Born</th>
+<th>Foreign Born</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Black</td>
+<td>1001.0</td>
+<td>56%</td>
+<td>41%</td>
+</tr>
+<tr class="even">
+<td>Hispanic</td>
+<td>434.6</td>
+<td>42%</td>
+<td>52%</td>
+</tr>
+<tr class="odd">
+<td>Other</td>
+<td>314.2</td>
+<td>93%</td>
+<td>2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="interaction-with-the-local-msm-epidemic" class="section level3">
+<h3>Interaction with the local MSM epidemic</h3>
+<p>Of the roughly 250 new diagnoses in KC each year, 75-90% are among MSM. The range reflects the relatively large number of new diagnoses classified as “No Identifiable Risk” (NIR). The heterosexual epidemic is thus a small part of the local HIV transmission system, and it is not entirely separate.</p>
+<p>A recent phylogenetic analysis by Oster and colleagues found that, nationally, 29% of the diagnosed sequences among women were most closely linked to an MSM case, while 21% were most closely linked to a heterosexual male case. In the western region of the US, the fraction linked to MSM rose to 52%.</p>
+</div>
+<div id="modeling-locally-relevant-boundary-transmissions" class="section level3">
+<h3>Modeling locally relevant boundary transmissions</h3>
+<p>All models have boundaries; no model represents the whole world. The more local the model, the less inclusive the modeled population. But the boundary that separates the modeled population from the rest of the world outside is artificial. The importance of this boundary increases as, in reality, transmission across this boundary increases.</p>
+<p>Our model explicitly represents the transmission network among heterosexuals, but it is clear from above that two boundaries must be addressed: migration and travel patterns among local Black and Hispanic populations, and the impact of the local MSM epidemic via men who have sex with both men and women (MSMW).</p>
+<p>In models used for policy (as opposed to theoretical exercises), it is important to establish that a model can reproduce observed epidemic outcomes. A set of model parameters is typically calibrated to ensure this. If the model is misspecified, however, these parameter values will be distorted to capture the unrepresented boundary transmissions. This may not be a significant problem if limited prevalence forecasting is the goal. But if the purpose of the model is to investigate the impact of alternative intervention strategies, the inaccurate parameter values can lead to inaccurate intervention impact estimates.</p>
+<p><br></p>
+</div>
+</div>
+<div id="overview-of-the-modeling-framework" class="section level2">
+<h2>Overview of the modeling framework</h2>
+<p>Our model is built using the <a href="https://www.epimodel.org/">EpiModel</a> software package. EpiModel is an open-source package written in the R programming language that depends on the <a href="https://statnet.github.io">statnet packages</a> for network model estimation and simulation. EpiModel is published on <a href="https://cran.r-project.org/web/packages/EpiModel/index.html">CRAN</a> and developed on <a href="https://github.com/EpiModel">Github</a>. See the <a href="https://statnet.github.io/NME">Network Modeling for Epidemics page</a> for training resources.</p>
+<p>We use a disease-specific branch of EpiModel, EpiModelHIV, which includes a set of modules tailored for HIV-specific transmission and disease dynamics. A broad outline of the model components is provided below.</p>
+<div id="demographics" class="section level3">
+<h3>Demographics</h3>
+<p>These are open-population models, with entry/exit rates designed to reproduce the observed age distributions. Demographic attributes include sex (M, F) and race (5 categories with distinctions between US and foreign born). In the heterosexual model men are divided into those who have sex with women only (MSW) or both men and women (MSMW) by race. The MSM model includes only males, and region is tracked (3 regions). Data are weighted to the demographic composition of the focal population.</p>
+</div>
+<div id="partnership-network-dynamics" class="section level3">
+<h3>Partnership network dynamics</h3>
+<p>The network dynamics are controlled by a 3-level model. Each level represents a type of partnership – cohabiting, persistent non-cohabiting, and one-time – and the partnerships in each network influence the formation of partnerships in the others. The dynamics for cohabiting and persistent partnerships are handled by temporal exponential random graph models (TERGMs); one-time partnerships use a cross-sectional ERGMs. Both are estimated from simple “egocentrically sampled” network data8, and adjusted dynamically to handle longitudinal changes in both population size and composition7. The fitted models are then used to simulate each of the 3 networks dynamically interacting over time, and the simulated individual and combined networks match the (appropriately scaled) cross-sectional sufficient statistics from the observed data.</p>
+</div>
+<div id="transmission" class="section level3">
+<h3>Transmission</h3>
+<p>At each timestep the probability of HIV transmission within sero-discordant pairs is represented as <span class="math inline">\(1-(1-\tau_k)^{α_j }\)</span>, where <span class="math inline">\(\tau\)</span> is the probability of transmission per act, and <span class="math inline">\(\alpha\)</span> is the number of acts. The subscripts on both parameters indicate heterogeneity. Factors influencing heterogeneity in act rate include race and partnership type (drawn from the respective data sources for each SNM). Factors influencing heterogeneity in <span class="math inline">\(\tau\)</span> include age, sex and race, stage of infection, CCR5 status, circumcision status, and the couple-specific status with respect to condom use, ART and PreP (drawn from local data, NSFG and the literature).</p>
+<p>Epimodel simulates the process in discrete time, sequentially updating each network (based on status in the other two), infection related processes, and demography; each process is Markov conditional on the others.</p>
+</div>
+<div id="engagement-with-the-care-continuum-cc" class="section level3">
+<h3>Engagement with the Care Continuum (CC)</h3>
+<p>This includes rates of testing, treatment uptake and adherence, with heterogeneity by demographic attributes. The CC parameters are calculated directly from PHSKC and WADOH surveillance data to reflect local conditions.</p>
+</div>
+<div id="clinical-outcomes" class="section level3">
+<h3>Clinical outcomes</h3>
+<p>Once an individual is infected, intrahost epidemiology is a function of interactions between their CC engagement and natural disease progression parameters derived from the literature.</p>
+</div>
+<div id="external-forces-of-infection-foi" class="section level3">
+<h3>External Forces of infection (FOI)</h3>
+<p>The heterosexual model currently includes two: epidemics in foreign countries visited by foreign born persons in the local population, and the epidemic among local MSM who have contact with MSMW. An additional FOI for PWID will be added as part of this project. No FOI currently exist in the MSM model but the analogous FOI will be added as part of this project.</p>
+<p><br></p>
+</div>
+</div>
+<div id="presentations" class="section level2">
+<h2>Presentations</h2>
+<div id="available-online" class="section level3">
+<h3>Available online</h3>
+<p>12/6/2016 - <a href="http://uwmedical.adobeconnect.com/p4hbzvpuqu4/">Modelling the Local Heterosexual HIV Epidemic: Understanding disparities and supporting prevention planning.</a></p>
+<p>9/19/2017 - <a href="https://www.youtube.com/watch?v=1tpM15OtxC4&amp;feature=youtu.be">Location of HIV acquisition and HIV testing history among African-born PLWH in the U.S.</a></p>
+<p>1/23/2018 - <a href="https://www.youtube.com/watch?v=uYQrgzcvB48">Update on the Seattle Heterosexual HIV/AIDS Modeling for Prevention (SHAMP) Project</a></p>
+</div>
+<div id="available-by-request" class="section level3">
+<h3>Available by request</h3>
+<p>Nov 9, 2016 - <a href="input/SHAMP_Presentations/Kerani_2016Nov9_SHAMP.pdf">Roxanne Kerani, African Immigrants Living with HIV in King County, WA</a></p>
+<p>July 7, 2018 - <a href="input/SHAMP_Presentations/Hamilton_2018July7_NMG.pdf">Deven Hamilton, Partnerships durations: Do they meet our expectations?</a></p>
+<p>Sep 20, 2018 - <a href="input/SHAMP_Presentations/Morris_2018Sept20_CPDH.pdf">Martina Morris, Syphillis Eradication Summit, California Department of Public Health</a></p>
+<p>Dec 6, 2016 - <a href="input/SHAMP_Presentations/Morris_2019May6_Lunchbox.pdf">PHSKC/SPRC Lunchbox Talk</a></p>
+<p>October 2018 - <a href="input/SHAMP_Presentations/Morris_2018_Oct_EpiMed.pdf">Martina Morris, EpiMed Discussion</a></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

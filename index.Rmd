@@ -1,0 +1,21 @@
+---
+title: "SHAMP: Seattle HIV/AIDS Modeling Project"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_width: 1
+---
+
+----
+
+This website summarizes the Seattle HIV/AIDS Modeling for Prevention (SHAMP) project, in which we assess the feasibility of developing a "local model" to support HIV prevention and treatment policy planning among heterosexuals in Seattle/King County, Washington. This pilot project was funded by a grant from the US NIH (R22 A110582).
+
+The chapters included are:
+
+Chapter | Content
+-------------- | ------------------------------------------
+Introduction | Project purpose and rationale for data source selections
+Data | Guide to data preparation and descriptive statistics of the analytic networks 
+Network Models | Exponential-family random graph model (ERGM) fits and diagnostics
+Epidemic Simulation | Epidemic simulation results
+

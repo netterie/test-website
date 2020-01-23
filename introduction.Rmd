@@ -1,0 +1,128 @@
+---
+title: "Introduction"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<br>
+
+## Abstract
+
+The goal of this project is to examine the feasibility of developing a state-of-the-art HIV transmission model to support public health planning at the local level.  The key innovation is to focus on a specific local jurisdiction, designing the model structure to reflect the local transmission dynamics and parameterizing the model with local data.  
+
+While our particular analytic focus is specific, the modeling framework is general and flexible.  We use a stochastic network model that relies on Exponential Family Random Graph Models (ERGMs), a principled framework for statistical estimation and simulation of networks.   ERGMs are both powerful and practical:  they can represent a wide range of empirically relevant network features, and can be estimated from simple survey sample data ("egocentrically sampled").
+
+This framework addresses a necessary direction for implementation science research: epidemic models must become more locally grounded. Advances in HIV treatment and prevention have changed the intervention policy landscape, and public health departments in the US are now tasked with determining which combination of treatment and prevention strategies will have the greatest impact.  Epidemic modeling could be a valuable resource for this type of comprehensive HIV prevention planning.  However, existing models are typically designed to be quite general, and parameterized with a combination of data from multiple populations.  As a result they are not rooted in, or representative of, a local epidemic.
+
+The heterogeneity in the HIV epidemics in the US is profound, by race, by sex and by locality. For example, the estimated 2.5% prevalence of HIV/AIDS in 2013 in Washington D.C. was nearly four times higher than the estimated 0.7% prevalence in Seattle, Washington (1, 2). These cities are facing very different epidemics, in very different political, economic, and social environments. Those environments in turn facilitate and constrain behaviors that lead to HIV transmission and acquisition, testing rates, and the cascade of care (CoC). To promote comprehensive HIV prevention effectively, planning must be driven by local information, and epidemic modeling can only contribute if it is locally grounded.
+
+<br>
+
+## Motivation:  The Heterosexual HIV epidemic in Seattle/King County
+
+This project focuses on a specific segment of the epidemic, in one jurisdiction.  The rationale for these choices is briefly explained below.
+
+### Why focus on heterosexuals?
+
+While heterosexuals are not currently designated a priority population for HIV prevention, they account for approximately 25% of HIV incidence in the U.S. nationally and 10-15% in WA State, with significant disparities by race and sex.  Of the 10 cities with the highest incidence in 2014, 4 report over 30% of their prevalent cases were heterosexually acquired (Appendix 1). In addition, minorities, and in particular minority women and immigrants are disproportionately impacted by the HIV epidemic.  To address those inequalities we must have a better understanding of the dynamics of transmission within these heterosexual populations. CDC has made a commitment to pursuing “a High-Impact Prevention approach by using combinations of scientifically proven, cost-effective, and scalable interventions targeted to the right populations in the right geographic areas”(20). In many localities, the right populations are heterosexual.
+
+It is also conceivable that in settings where prevalence among heterosexuals is very low, modest low-cost prevention efforts could bring the heterosexual epidemic down below the threshold for epidemic persistence. This is the real target for the programmatic efforts to “End AIDS” – not the prevention of all transmission at the individual level, but sub-threshold transmission at the population level. Modeling can help to identify whether transmission is close to that threshold, and it can help to identify the optimal strategy for reaching that goal, which would be a significant public health accomplishment.
+
+### Why Seattle/King County?
+
+Seattle/King County is an ideal setting for this pilot project because it has a robust HIV treatment and prevention program, Washington State  has set a goal of reducing incidence by 50% by 2020, there is a strong team of epidemic modelers at the University of Washington (UW), and there is long history of collaboration between the UW, the state (WA DoH) and local public health departments (Public Health Seattle King County, PHSKC) including using epidemic models to inform local prevention initiatives. 
+
+### Locally relevant, but methodologically general
+
+This project is designed to demonstrate that complex, realistic epidemic models can be used to support specific local planning.  But this local specificity is accomplished within a general, adaptible framework.  The features of this model that make it local can be adapted to any context.
+
+<br>
+
+## Epidemic features
+
+There are two key features of the local heterosexual epidemic in Seattle/King County:  the racial disparities here display empirical patterns that imply international travel and migration dynamics, and phylogenetic analyses suggest a connection to the local MSM epidemic.  
+
+### International travel and migration
+
+Heterosexual HIV prevalence differentials in Seattle/KC display large racial disparities similar to those observed throughout the U.s., in all risk exposure groups.  An important overlay, however, is migration.  KC is home to a diverse population, with large communities of immigrants from countries in East Africa and Central America.  The impact on HIV prevalence differentials can be seen in the table below:  about half of the Black and Hispanic persons living with HIV in KC are foreign born, compared to about 2% of all other groups.
+
+Subgroup | Estimated HIV Prev/100K | US Born | Foreign Born
+-------- | ------------------------|---------|---------
+Black    | 1001.0 | 56% | 41%
+Hispanic |  434.6 | 42% | 52%
+Other    |  314.2 | 93% | 2%
+
+### Interaction with the local MSM epidemic
+
+Of the roughly 250 new diagnoses in KC each year, 75-90% are among MSM.  The range reflects the relatively large number of new diagnoses classified as "No Identifiable Risk" (NIR).  The heterosexual epidemic is thus a small part of the local HIV transmission system, and it is not entirely separate.  
+
+A recent phylogenetic analysis by Oster and colleagues found that, nationally, 29% of the diagnosed sequences among women were most closely linked to an MSM case, while 21% were most closely linked to a heterosexual male case.  In the western region of the US, the fraction linked to MSM rose to 52%.
+
+### Modeling locally relevant boundary transmissions
+
+All models have boundaries; no model represents the whole world.  The more local the model, the less inclusive the modeled population.  But the boundary that separates the modeled population from the rest of the world outside is artificial. The importance of this boundary increases as, in reality, transmission across this boundary increases.
+
+Our model explicitly represents the transmission network among heterosexuals, but it is clear from above that two boundaries must be addressed:  migration and travel patterns among local Black and Hispanic populations, and the impact of the local MSM epidemic via men who have sex with both men and women (MSMW).
+
+In models used for policy (as opposed to theoretical exercises), it is important to establish that a model can reproduce observed epidemic outcomes. A set of model parameters is typically calibrated to ensure this. If the model is misspecified, however, these parameter values will be distorted to capture the unrepresented boundary transmissions. This may not be a significant problem if limited prevalence forecasting is the goal. But if the purpose of the model is to investigate the impact of alternative intervention strategies, the inaccurate parameter values can lead to inaccurate intervention impact estimates.
+
+
+<br>
+
+## Overview of the modeling framework
+
+Our model is built using the [EpiModel](https://www.epimodel.org/) software package.  EpiModel is an open-source package written in the R programming language that depends on the [statnet packages](https://statnet.github.io) for network model estimation and simulation.  EpiModel is published on [CRAN](https://cran.r-project.org/web/packages/EpiModel/index.html) and developed on [Github](https://github.com/EpiModel).  See the [Network Modeling for Epidemics page](https://statnet.github.io/NME) for training resources.  
+
+We use a disease-specific branch of EpiModel, EpiModelHIV, which includes a set of modules tailored for HIV-specific transmission and disease dynamics.  A broad outline of the model components is provided below.
+
+### Demographics
+These are open-population models, with entry/exit rates designed to reproduce the observed age distributions. Demographic attributes include sex (M, F) and race (5 categories with distinctions between US and foreign born). In the heterosexual model men are divided into those who have sex with women only (MSW) or both men and women (MSMW) by race. The MSM model includes only males, and region is tracked (3 regions). Data are weighted to the demographic composition of the focal population. 
+
+### Partnership network dynamics
+The network dynamics are controlled by a 3-level model.  Each level represents a type of partnership -- cohabiting, persistent non-cohabiting, and one-time -- and the partnerships in each network influence the formation of partnerships in the others. The dynamics for cohabiting and persistent partnerships are handled by temporal exponential random graph models (TERGMs); one-time partnerships use a cross-sectional ERGMs. Both are estimated from simple “egocentrically sampled” network data8, and adjusted dynamically to handle longitudinal changes in both population size and composition7. The fitted models are then used to simulate each of the 3 networks dynamically interacting over time, and the simulated individual and combined networks match the (appropriately scaled) cross-sectional sufficient statistics from the observed data.
+
+### Transmission
+At each timestep the probability of HIV transmission within sero-discordant pairs is represented as $1-(1-\tau_k)^{α_j }$, where $\tau$ is the probability of transmission per act, and $\alpha$ is the number of acts. The subscripts on both parameters indicate heterogeneity. Factors influencing heterogeneity in act rate include race and partnership type (drawn from the respective data sources for each SNM). Factors influencing heterogeneity in $\tau$ include age, sex and race, stage of infection, CCR5 status, circumcision status, and the couple-specific status with respect to condom use, ART and PreP (drawn from local data, NSFG and the literature). 
+
+Epimodel simulates the process in discrete time, sequentially updating each network (based on status in the other two), infection related processes, and demography; each process is Markov conditional on the others. 
+
+### Engagement with the Care Continuum (CC)
+This includes rates of testing, treatment uptake and adherence, with heterogeneity by demographic attributes. The CC parameters are calculated directly from PHSKC and WADOH surveillance data to reflect local conditions. 
+
+### Clinical outcomes
+Once an individual is infected, intrahost epidemiology is a function of interactions between their CC engagement and natural disease progression parameters derived from the literature. 
+
+### External Forces of infection (FOI)
+The heterosexual model currently includes two: epidemics in foreign countries visited by foreign born persons in the local population, and the epidemic among local MSM who have contact with MSMW. An additional FOI for PWID will be added as part of this project. No FOI currently exist in the MSM model but the analogous FOI will be added as part of this project.
+
+<br>
+
+## Presentations 
+
+### Available online
+
+12/6/2016 - [Modelling the Local Heterosexual HIV Epidemic: Understanding disparities and supporting prevention planning.](http://uwmedical.adobeconnect.com/p4hbzvpuqu4/) 
+
+9/19/2017 - [Location of HIV acquisition and HIV testing history among African-born PLWH in the U.S.](https://www.youtube.com/watch?v=1tpM15OtxC4&feature=youtu.be) 
+
+1/23/2018 - [Update on the Seattle Heterosexual HIV/AIDS Modeling for Prevention (SHAMP) Project](https://www.youtube.com/watch?v=uYQrgzcvB48)
+
+### Available by request
+
+Nov 9, 2016 - [Roxanne Kerani, African Immigrants Living with HIV in King County, WA](input/SHAMP_Presentations/Kerani_2016Nov9_SHAMP.pdf)
+
+July 7, 2018 - [Deven Hamilton, Partnerships durations: Do they meet our expectations?](input/SHAMP_Presentations/Hamilton_2018July7_NMG.pdf)
+
+Sep 20, 2018 - [Martina Morris, Syphillis Eradication Summit, California Department of Public Health](input/SHAMP_Presentations/Morris_2018Sept20_CPDH.pdf)
+
+Dec 6, 2016 - [PHSKC/SPRC Lunchbox Talk](input/SHAMP_Presentations/Morris_2019May6_Lunchbox.pdf)
+
+October 2018 - [Martina Morris, EpiMed Discussion](input/SHAMP_Presentations/Morris_2018_Oct_EpiMed.pdf)
+
+
+
+
+
+

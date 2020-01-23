@@ -1,0 +1,19 @@
+name: "Seattle HIV/AIDS Modeling Project"
+navbar:
+  title: "SHAMP"
+  left:
+    - text: "Introduction"
+      href: introduction.html
+    - text: "Data"
+      href: data.html
+    - text: "Network Models"
+      href: network_models.html
+    - text: "Epidemic Simulation"
+      href: epidemic_simulation.html
+output_dir: "."
+output:
+  html_document:
+    theme: yeti
+    highlight: textmate
+#    include:
+#      after_body: _footer.html
